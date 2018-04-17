@@ -14,9 +14,10 @@ class ApplicationController < ActionController::Base
   def is_user_logged_in?
 	#complete this method
   	logged_in = false
-    if session[:current_user_id].present?
+    if session[:current_user_id].present? && !session[:current_user_id].nil?
       logged_in = true
     end
 	  if logged_in then true else redirect_to root_path end
+    return logged_in
   end
 end
