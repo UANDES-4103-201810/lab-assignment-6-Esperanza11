@@ -26,18 +26,30 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     #complete this method
+
   end
+
 
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
     #complete this method
+    if is_user_logged_in?
+      # action
+    else
+      # error
+    end
   end
 
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
     #complete this method
+    if is_user_logged_in?
+      # action
+    else
+      # error
+    end
   end
 
   private
