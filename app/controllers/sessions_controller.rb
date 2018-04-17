@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
 		if user.present? && user.password == user_params[:password] && !user.password.nil?
 			session[:current_user_id] = user.id
 		else
-			session[:current_user_id] = nil
+      session[:current_user_id] = nil
 		end
 		if is_user_logged_in?
 			flash[:notice] = "success"
@@ -21,7 +21,10 @@ class SessionsController < ApplicationController
 
 	def destroy
 		#complete this method
-	end
+    session[:current_user_id] = nil
+    flash[:notice] = "you have logged out correctly"
+    root_path
+  end
 private
 	def user_params
 		params.require(:session).permit(:email, :password)
