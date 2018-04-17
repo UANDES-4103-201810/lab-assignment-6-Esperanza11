@@ -26,7 +26,18 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     #complete this method
-
+    if is_user_logged_in?
+      # action
+      user = User.create(user_params)
+      if user.save
+        flash[:notice] = "The user has been created correctly"
+      else
+        flash[:notice] = "The user has NOT been created"
+      end
+    else
+      # error
+      flash[:notice] = "You are NOT logged in"
+    end
   end
 
 
@@ -35,21 +46,22 @@ class UsersController < ApplicationController
   def update
     #complete this method
     if is_user_logged_in?
-      # action
+      @user = User.update(user_params)
+      if @user.save
+        flash[:notice] = "The user has been created correctly"
+      else
+        flash[:notice] = "The user has NOT been created"
+      end
     else
       # error
-    end
+      flash[:notice] = "You are NOT logged in"
   end
+
 
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
     #complete this method
-    if is_user_logged_in?
-      # action
-    else
-      # error
-    end
   end
 
   private
@@ -62,4 +74,5 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:name, :last_name, :email, :password, :phone)
     end
+  end
 end
